@@ -21,7 +21,7 @@ function buildSteps(arr: number[], target: number): SearchStep[] {
   while (lo <= hi) {
     const mid = Math.floor((lo + hi) / 2)
     if (arr[mid] === target) {
-      steps.push({ lo, hi, mid, comparison: "found", note: `arr[${mid}] = ${arr[mid]} = target. Found at index ${mid}.` })
+      steps.push({ lo, hi, mid, comparison: "found", note: `arr[${mid}] = ${arr[mid]} = alvo. Encontrado no índice ${mid}.` })
       return steps
     }
     if (arr[mid] < target) {
@@ -30,7 +30,7 @@ function buildSteps(arr: number[], target: number): SearchStep[] {
         hi,
         mid,
         comparison: "go-right",
-        note: `arr[${mid}] = ${arr[mid]} < ${target}. Discard left half, search [${mid + 1}…${hi}].`,
+        note: `arr[${mid}] = ${arr[mid]} < ${target}. Descartar metade esquerda, buscar [${mid + 1}…${hi}].`,
       })
       lo = mid + 1
     } else {
@@ -39,12 +39,12 @@ function buildSteps(arr: number[], target: number): SearchStep[] {
         hi,
         mid,
         comparison: "go-left",
-        note: `arr[${mid}] = ${arr[mid]} > ${target}. Discard right half, search [${lo}…${mid - 1}].`,
+        note: `arr[${mid}] = ${arr[mid]} > ${target}. Descartar metade direita, buscar [${lo}…${mid - 1}].`,
       })
       hi = mid - 1
     }
   }
-  steps.push({ lo, hi, mid: -1, comparison: "not-found", note: `${target} is not in the array.` })
+  steps.push({ lo, hi, mid: -1, comparison: "not-found", note: `${target} não está no array.` })
   return steps
 }
 
@@ -93,10 +93,10 @@ export function BinarySearchVisualizer() {
 
   return (
     <section className="flex flex-col gap-8 scroll-mt-24" id="binary-search">
-      <SectionHeader index="03" title="Binary Search" complexity="O(log n)">
-        Binary search locates a value in a sorted array by repeatedly halving the search range. It
-        checks the middle element and discards the half that can&apos;t contain the target, cutting the
-        problem size in two every step.
+      <SectionHeader index="03" title="Busca Binária" complexity="O(log n)">
+        A busca binária localiza um valor em um array ordenado reduzindo repetidamente o intervalo de
+        busca pela metade. Ela verifica o elemento do meio e descarta a metade que não pode conter o
+        alvo, cortando o tamanho do problema pela metade a cada passo.
       </SectionHeader>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
@@ -134,7 +134,7 @@ export function BinarySearchVisualizer() {
 
             <div className="flex flex-wrap items-center justify-center gap-4 font-mono text-xs text-muted-foreground">
               <span>
-                target: <span className="text-foreground">{target}</span>
+                alvo: <span className="text-foreground">{target}</span>
               </span>
               <span>
                 lo: <span className="text-foreground">{current.lo}</span>
@@ -182,7 +182,7 @@ export function BinarySearchVisualizer() {
 
           <Panel>
             <div className="flex flex-col gap-3">
-              <span className="font-mono text-xs text-muted-foreground">your own array &amp; target</span>
+              <span className="font-mono text-xs text-muted-foreground">seu próprio array &amp; alvo</span>
               <form
                 className="flex flex-col gap-2"
                 onSubmit={(e) => {
@@ -192,33 +192,33 @@ export function BinarySearchVisualizer() {
               >
                 <label className="flex flex-col gap-1">
                   <span className="font-mono text-[10px] text-muted-foreground">
-                    array (comma separated — auto-sorted)
+                    array (separado por vírgula — auto-ordenado)
                   </span>
                   <Input
                     value={arrayInput}
                     onChange={(e) => setArrayInput(e.target.value)}
                     className="font-mono text-xs"
-                    aria-label="custom array"
+                    aria-label="array personalizado"
                   />
                 </label>
                 <div className="flex items-end gap-2">
                   <label className="flex flex-1 flex-col gap-1">
-                    <span className="font-mono text-[10px] text-muted-foreground">target</span>
+                    <span className="font-mono text-[10px] text-muted-foreground">alvo</span>
                     <Input
                       inputMode="numeric"
                       value={targetInput}
                       onChange={(e) => setTargetInput(e.target.value.replace(/[^0-9-]/g, ""))}
                       className="font-mono"
-                      aria-label="custom target"
+                      aria-label="alvo personalizado"
                     />
                   </label>
                   <Button type="submit" className="font-mono">
-                    run
+                    executar
                   </Button>
                 </div>
               </form>
 
-              <span className="mt-1 font-mono text-xs text-muted-foreground">or search a preset</span>
+              <span className="mt-1 font-mono text-xs text-muted-foreground">ou busque um preset</span>
               <div className="grid grid-cols-2 gap-2">
                 {targetPresets.map((t) => (
                   <Button
@@ -233,8 +233,8 @@ export function BinarySearchVisualizer() {
                 ))}
               </div>
               <p className="font-mono text-[11px] leading-relaxed text-muted-foreground">
-                The array is always sorted before searching. Try a value that isn&apos;t present to see the
-                not-found path.
+                O array é sempre ordenado antes da busca. Tente um valor que não esteja presente para ver o
+                caminho de não encontrado.
               </p>
             </div>
           </Panel>

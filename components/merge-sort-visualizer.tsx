@@ -46,7 +46,7 @@ function buildSteps(input: number[]): MergeStep[] {
       mid,
       phase: "split",
       depth,
-      note: `Divide [${lo}…${hi}] into [${lo}…${mid}] and [${mid + 1}…${hi}].`,
+      note: `Dividir [${lo}…${hi}] em [${lo}…${mid}] e [${mid + 1}…${hi}].`,
       activeIds: idsIn(lo, hi),
       compareIds: [],
       placedId: null,
@@ -68,7 +68,7 @@ function buildSteps(input: number[]): MergeStep[] {
         mid,
         phase: "compare",
         depth,
-        note: `Compare ${left[i].value} and ${right[j].value} — take the smaller.`,
+        note: `Comparar ${left[i].value} e ${right[j].value} — pegar o menor.`,
         activeIds: idsIn(lo, hi),
         compareIds: [left[i].id, right[j].id],
         placedId: null,
@@ -85,7 +85,7 @@ function buildSteps(input: number[]): MergeStep[] {
         mid,
         phase: "place",
         depth,
-        note: `Place ${pick.value} into position ${lo + merged.length - 1}.`,
+        note: `Colocar ${pick.value} na posição ${lo + merged.length - 1}.`,
         activeIds: idsIn(lo, hi),
         compareIds: [],
         placedId: pick.id,
@@ -102,7 +102,7 @@ function buildSteps(input: number[]): MergeStep[] {
         mid,
         phase: "place",
         depth,
-        note: `Carry remaining ${pick.value} into position ${lo + merged.length - 1}.`,
+        note: `Levar ${pick.value} restante para a posição ${lo + merged.length - 1}.`,
         activeIds: idsIn(lo, hi),
         compareIds: [],
         placedId: pick.id,
@@ -119,7 +119,7 @@ function buildSteps(input: number[]): MergeStep[] {
         mid,
         phase: "place",
         depth,
-        note: `Carry remaining ${pick.value} into position ${lo + merged.length - 1}.`,
+        note: `Levar ${pick.value} restante para a posição ${lo + merged.length - 1}.`,
         activeIds: idsIn(lo, hi),
         compareIds: [],
         placedId: pick.id,
@@ -131,7 +131,7 @@ function buildSteps(input: number[]): MergeStep[] {
       mid,
       phase: "merged",
       depth,
-      note: `Sub-array [${lo}…${hi}] is now sorted.`,
+      note: `Sub-array [${lo}…${hi}] está agora ordenado.`,
       activeIds: idsIn(lo, hi),
       compareIds: [],
       placedId: null,
@@ -144,7 +144,7 @@ function buildSteps(input: number[]): MergeStep[] {
     mid: -1,
     phase: "start",
     depth: 0,
-    note: "Starting array — divide until each piece holds a single element.",
+    note: "Array inicial — dividir até que cada parte contenha um único elemento.",
     activeIds: idsIn(0, cells.length - 1),
     compareIds: [],
     placedId: null,
@@ -156,7 +156,7 @@ function buildSteps(input: number[]): MergeStep[] {
     mid: -1,
     phase: "done",
     depth: 0,
-    note: "Array fully sorted.",
+    note: "Array totalmente ordenado.",
     activeIds: idsIn(0, cells.length - 1),
     compareIds: [],
     placedId: null,
@@ -216,9 +216,9 @@ export function MergeSortVisualizer() {
   return (
     <section className="flex flex-col gap-8 scroll-mt-24" id="merge-sort">
       <SectionHeader index="02" title="Merge Sort" complexity="O(n log n)">
-        Merge sort recursively splits the array in half until each piece holds a single element, then
-        merges the pieces back in sorted order. Watch the blocks glide into place: blue marks the active
-        sub-array, amber the two values being compared, and green the elements locked into final order.
+        O Merge Sort divide recursivamente o array ao meio até que cada parte contenha um único elemento, então
+        mescla as partes de volta em ordem classificada. Observe os blocos deslizarem para seus lugares: azul marca
+        o sub-array ativo, âmbar os dois valores sendo comparados e verde os elementos fixados na ordem final.
       </SectionHeader>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
@@ -283,22 +283,22 @@ export function MergeSortVisualizer() {
                 }`}
               >
                 {current.phase === "split"
-                  ? "dividing"
+                  ? "dividindo"
                   : current.phase === "compare"
-                    ? "comparing"
+                    ? "comparando"
                     : current.phase === "place"
-                      ? "placing"
+                      ? "colocando"
                       : current.phase === "merged"
-                        ? "merged"
+                        ? "mesclado"
                         : current.phase === "done"
-                          ? "sorted"
-                          : "start"}
+                          ? "ordenado"
+                          : "início"}
               </span>
-              <span className="font-mono text-xs text-muted-foreground">depth {current.depth}</span>
+              <span className="font-mono text-xs text-muted-foreground">profundidade {current.depth}</span>
               <div className="ml-auto flex flex-wrap items-center gap-3 font-mono text-[10px] text-muted-foreground">
-                <Legend className="bg-chart-2" label="active" />
-                <Legend className="bg-chart-3" label="comparing" />
-                <Legend className="bg-primary" label="placed" />
+                <Legend className="bg-chart-2" label="ativo" />
+                <Legend className="bg-chart-3" label="comparando" />
+                <Legend className="bg-primary" label="colocado" />
               </div>
             </div>
 
@@ -337,7 +337,7 @@ export function MergeSortVisualizer() {
 
           <Panel>
             <div className="flex flex-col gap-3">
-              <span className="font-mono text-xs text-muted-foreground">your own array</span>
+              <span className="font-mono text-xs text-muted-foreground">seu próprio array</span>
               <form
                 className="flex flex-col gap-2"
                 onSubmit={(e) => {
@@ -349,18 +349,18 @@ export function MergeSortVisualizer() {
                   value={arrayInput}
                   onChange={(e) => setArrayInput(e.target.value)}
                   className="font-mono text-xs"
-                  aria-label="custom array"
-                  placeholder="e.g. 38, 27, 43, 3, 9"
+                  aria-label="array personalizado"
+                  placeholder="ex: 38, 27, 43, 3, 9"
                 />
                 <Button type="submit" className="font-mono">
-                  sort it
+                  ordenar
                 </Button>
               </form>
               <p className="font-mono text-[11px] leading-relaxed text-muted-foreground">
-                Comma separated, up to 12 positive numbers.
+                Separados por vírgula, até 12 números positivos.
               </p>
 
-              <span className="mt-1 font-mono text-xs text-muted-foreground">or pick a dataset</span>
+              <span className="mt-1 font-mono text-xs text-muted-foreground">ou escolha um dataset</span>
               <div className="flex flex-col gap-2">
                 {presets.map((p, i) => (
                   <Button
@@ -374,7 +374,7 @@ export function MergeSortVisualizer() {
                   </Button>
                 ))}
                 <Button variant="secondary" size="sm" className="font-mono" onClick={() => load(randomArray())}>
-                  shuffle random
+                  embaralhar aleatório
                 </Button>
               </div>
             </div>

@@ -74,10 +74,10 @@ export function GcdVisualizer() {
 
   return (
     <section className="flex flex-col gap-8 scroll-mt-24" id="gcd">
-      <SectionHeader index="01" title="Euclidean GCD" complexity="O(log min(a, b))">
-        The Euclidean algorithm finds the greatest common divisor by repeatedly replacing the larger
-        number with the remainder of dividing it by the smaller. The problem shrinks fast until the
-        remainder hits zero — the last non-zero divisor is the answer.
+      <SectionHeader index="01" title="MDC Euclidiano" complexity="O(log min(a, b))">
+        O algoritmo de Euclides encontra o máximo divisor comum substituindo repetidamente o maior
+        número pelo resto da divisão pelo menor. O problema diminui rapidamente até que o resto
+        chegue a zero — o último divisor não nulo é a resposta.
       </SectionHeader>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
@@ -110,15 +110,15 @@ export function GcdVisualizer() {
                   <span>
                     {s.a} = {s.q} &times; {s.b} + <span className={s.r === 0 ? "text-primary" : "text-foreground"}>{s.r}</span>
                   </span>
-                  {s.r === 0 && <span className="text-primary">gcd found</span>}
+                  {s.r === 0 && <span className="text-primary">mdc encontrado</span>}
                 </div>
               ))}
             </div>
 
             <StepNote tone={atEnd ? "done" : "active"}>
               {current?.r === 0
-                ? `Remainder is 0 → gcd(${a}, ${b}) = ${gcdResult}`
-                : `${current?.a} mod ${current?.b} = ${current?.r}. Replace (a, b) with (${current?.b}, ${current?.r}).`}
+                ? `Resto é 0 → mdc(${a}, ${b}) = ${gcdResult}`
+                : `${current?.a} mod ${current?.b} = ${current?.r}. Substitua (a, b) por (${current?.b}, ${current?.r}).`}
             </StepNote>
           </div>
         </Panel>
@@ -147,7 +147,7 @@ export function GcdVisualizer() {
 
           <Panel>
             <div className="flex flex-col gap-3">
-              <span className="font-mono text-xs text-muted-foreground">your own values</span>
+              <span className="font-mono text-xs text-muted-foreground">seus próprios valores</span>
               <form
                 className="flex items-end gap-2"
                 onSubmit={(e) => {
@@ -162,7 +162,7 @@ export function GcdVisualizer() {
                     value={inputA}
                     onChange={(e) => setInputA(e.target.value.replace(/[^0-9]/g, ""))}
                     className="font-mono"
-                    aria-label="value a"
+                    aria-label="valor a"
                   />
                 </label>
                 <label className="flex flex-1 flex-col gap-1">
@@ -172,15 +172,15 @@ export function GcdVisualizer() {
                     value={inputB}
                     onChange={(e) => setInputB(e.target.value.replace(/[^0-9]/g, ""))}
                     className="font-mono"
-                    aria-label="value b"
+                    aria-label="valor b"
                   />
                 </label>
                 <Button type="submit" className="font-mono">
-                  run
+                  executar
                 </Button>
               </form>
 
-              <span className="mt-1 font-mono text-xs text-muted-foreground">or try a preset</span>
+              <span className="mt-1 font-mono text-xs text-muted-foreground">ou tente um preset</span>
               <div className="grid grid-cols-2 gap-2">
                 {presets.map(([pa, pb]) => (
                   <Button
@@ -195,8 +195,8 @@ export function GcdVisualizer() {
                 ))}
               </div>
               <div className="mt-2 rounded-lg border border-primary/30 bg-primary/5 p-4 text-center">
-                <div className="font-mono text-xs text-muted-foreground">result</div>
-                <div className="font-mono text-2xl font-semibold text-primary">gcd = {gcdResult}</div>
+                <div className="font-mono text-xs text-muted-foreground">resultado</div>
+                <div className="font-mono text-2xl font-semibold text-primary">mdc = {gcdResult}</div>
               </div>
             </div>
           </Panel>

@@ -10,9 +10,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Divide & Conquer — Interactive Algorithm Visualizer',
+  title: 'Dividir & Conquistar — Visualizador Interativo de Algoritmos',
   description:
-    'Learn divide-and-conquer algorithms interactively: Euclidean GCD, Merge Sort, Binary Search, and the Fast Fourier Transform.',
+    'Aprenda algoritmos de dividir e conquistar de forma interativa: MDC Euclidiano, Merge Sort, Busca Binária e a Transformada Rápida de Fourier.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark`}>
+    <html lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable} dark`}>
       <body className="font-sans antialiased bg-background">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

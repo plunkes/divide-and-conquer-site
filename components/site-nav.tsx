@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import { Binary } from "lucide-react"
 
 const links = [
-  { href: "#gcd", label: "GCD" },
+  { href: "#gcd", label: "MDC" },
   { href: "#merge-sort", label: "Merge Sort" },
-  { href: "#binary-search", label: "Binary Search" },
+  { href: "#binary-search", label: "Busca Binária" },
 ]
 
 export function SiteNav() {
@@ -28,7 +28,7 @@ export function SiteNav() {
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center gap-2 font-semibold tracking-tight">
           <Binary className="size-5 text-primary" />
-          <span>D&amp;C Visualizer</span>
+          <span>Visualizador D&amp;C</span>
         </a>
         <div className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
